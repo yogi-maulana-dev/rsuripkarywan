@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/welcome">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/karyawan">Karyawan</a>
@@ -90,6 +90,7 @@
                     <th>Nama</th>
                     <th>Tanggal Lahir</th>
                     <th>Gaji</th>
+                    <th>Aksi</th>
                 </tr>
             </tfoot>
         </table>
