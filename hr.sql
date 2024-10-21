@@ -64,7 +64,7 @@ DROP TRIGGER IF EXISTS `trg_karyawan_delete`;
 DELIMITER $$
 CREATE TRIGGER `trg_karyawan_delete` AFTER DELETE ON `karyawan` FOR EACH ROW BEGIN
   INSERT INTO tlog (tanggal, jam, keterangan, id_karyawan) 
-  VALUES (OLD.tgl_lahir, NOW(), 3, OLD.id); -- Keterangan 3: Delete
+  VALUES (OLD.tgl_lahir, NOW(), 3, OLD.id); 
 END
 $$
 DELIMITER ;
@@ -72,7 +72,7 @@ DROP TRIGGER IF EXISTS `trg_karyawan_insert`;
 DELIMITER $$
 CREATE TRIGGER `trg_karyawan_insert` AFTER INSERT ON `karyawan` FOR EACH ROW BEGIN
   INSERT INTO tlog (tanggal, jam, keterangan, id_karyawan) 
-  VALUES (NEW.tgl_lahir, NOW(), 1, NEW.id); -- Keterangan 1: Insert
+  VALUES (NEW.tgl_lahir, NOW(), 1, NEW.id); 
 END
 $$
 DELIMITER ;
@@ -80,7 +80,7 @@ DROP TRIGGER IF EXISTS `trg_karyawan_update`;
 DELIMITER $$
 CREATE TRIGGER `trg_karyawan_update` AFTER UPDATE ON `karyawan` FOR EACH ROW BEGIN
   INSERT INTO tlog (tanggal, jam, keterangan, id_karyawan) 
-  VALUES (NEW.tgl_lahir, NOW(), 2, NEW.id); -- Keterangan 2: Update
+  VALUES (NEW.tgl_lahir, NOW(), 2, NEW.id); 
 END
 $$
 DELIMITER ;
