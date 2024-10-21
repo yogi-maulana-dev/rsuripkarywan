@@ -22,50 +22,64 @@
 </head>
 
 <body>
-    <h1>Selamat Datang Di Website Gaji RS Urip</h1>
-
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">RS Urip</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/karyawan">Karyawan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tlog">Tlog</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    @endif
+    </nav>
 
+    <div class="container mt-4">
+        <h1>Selamat Datang Di Website Gaji RS Urip</h1>
 
-    <a href="/karyawan_create" class="btn btn-info right" role="button">Tambah Karyawan</a>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Tanggal Lahir</th>
-                <th>Gaji</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{--  <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-            </tr>  --}}
+        <a href="/karyawan_create" class="btn btn-info right" role="button">Tambah Karyawan</a>
 
-            @foreach ($karyawan as $karyawans)
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
                 <tr>
-                    <td>{{ $karyawans->nama }}</td>
-                    <td>{{ $karyawans->tgl_lahir }}</td>
-                    <td>{{ $karyawans->gaji }}</td>
+                    <th>Nama</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Gaji</th>
                 </tr>
-            @endforeach
-
-
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Nama</th>
-                <th>Tanggal Lahir</th>
-                <th>Gaji</th>
-            </tr>
-        </tfoot>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach ($karyawan as $karyawans)
+                    <tr>
+                        <td>{{ $karyawans->nama }}</td>
+                        <td>{{ $karyawans->tgl_lahir }}</td>
+                        <td>{{ $karyawans->gaji }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Nama</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Gaji</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 
     <!-- jQuery 3.7.1 -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -79,8 +93,10 @@
     <!-- DataTables Bootstrap 5 Integration -->
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
     </script>
 </body>
 
