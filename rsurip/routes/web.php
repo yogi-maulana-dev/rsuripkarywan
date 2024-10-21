@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/karyawan_create', [KaryawanController::class, 'create'])->name('karyawan_create');
 Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
+Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');

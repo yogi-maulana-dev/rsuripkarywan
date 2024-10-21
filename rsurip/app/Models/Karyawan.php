@@ -12,6 +12,8 @@ class Karyawan extends Model
 
     public $table = 'karyawan';
 
+    public $timestamps = false;  // Nonaktifkan timestamps
+
     /**
      * The attributes that are mass assignable.
      *

@@ -33,6 +33,19 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nama' => 'required|string|max:70',
+            'tgl_lahir' => 'required|date',
+            'gaji' => 'required|numeric|min:0',
+        ]);
+
+        $karyawan = new Karyawan;
+        $karyawan->nama = $request->input('nama');
+        $karyawan->tgl_lahir = $request->input('tgl_lahir');
+        $karyawan->gaji = $request->input('gaji');
+        $karyawan->save();
+
+        return redirect('/karyawan')->with('success', 'Karyawan berhasil ditambahkan');
     }
 
     /**

@@ -24,6 +24,13 @@
 <body>
     <h1>Selamat Datang Di Website Gaji RS Urip</h1>
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+
     <a href="/karyawan_create" class="btn btn-info right" role="button">Tambah Karyawan</a>
 
     <table id="example" class="table table-striped" style="width:100%">

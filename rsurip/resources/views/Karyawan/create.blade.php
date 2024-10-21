@@ -25,12 +25,26 @@
     <h1>Selamat Datang Di Website Gaji RS Urip</h1>
 
 
-    <form method="post" action="{{ create_store }}">
+    <form method="post" action="{{ route('karyawan.store') }}">
         @csrf
-        <input type="text" class="" name="nama">
-        <input type="date" class="" name="tgl_lahir">
-        <input type="number" class="" name="gaji">
+        <div class="mb-3">
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
+        </div>
+
+        <div class="mb-3">
+            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+            <input type="date" class="form-control" name="tgl_lahir">
+        </div>
+
+        <div class="mb-3">
+            <label for="gaji" class="form-label">Gaji</label>
+            <input type="number" class="form-control" name="gaji" placeholder="Masukkan Gaji">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
+
 
 
     <!-- jQuery 3.7.1 -->
