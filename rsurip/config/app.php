@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -155,20 +154,22 @@ return [
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
-         * Package Service Providers...
-         */
-
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-    ])->toArray(),
+    'providers' => ServiceProvider::defaultProviders()
+        ->merge([
+            /*
+             * Package Service Providers...
+             */
+            Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+            /*
+             * Application Service Providers...
+             */
+            App\Providers\AppServiceProvider::class,
+            App\Providers\AuthServiceProvider::class,
+            // App\Providers\BroadcastServiceProvider::class,
+            App\Providers\EventServiceProvider::class,
+            App\Providers\RouteServiceProvider::class,
+        ])
+        ->toArray(),
 
     /*
     |--------------------------------------------------------------------------
@@ -181,8 +182,12 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-    ])->toArray(),
-
+    'aliases' => Facade::defaultAliases()
+        ->merge([
+            // 'Example' => App\Facades\Example::class,
+            'Jwt' => Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+            'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+            'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        ])
+        ->toArray(),
 ];
