@@ -52,19 +52,32 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $karyawan = Karyawan::find($id);
+        try {
+            // Cari karyawan berdasarkan ID
+            $karyawan = Karyawan::find($id);
 
-        if (! $karyawan) {
-            return response()->json(['error' => 'Record not found'], 404);
+            // Jika karyawan tidak ditemukan, kembalikan error
+            if (! $karyawan) {
+                return response()->json(['error' => 'Record not found'], 404);
+            }
+
+            // Validasi input dari request
+            $data = $request->validate([
+                'nama' => 'string|max:100',
+                'tgl_lahir' => 'date',
+                'gaji' => 'numeric',
+            ]);
+
+            // Update data karyawan
+            $karyawan->update($data);
+
+            // Kembalikan respons sukses
+            return response()->json(['message' => 'Data karyawan berhasil diupdate', 'data' => $karyawan], 200);
+
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, kembalikan respons error
+            return response()->json(['error' => 'Terjadi kesalahan saat mengupdate data: '.$e->getMessage()], 500);
         }
-        $data = $request->validate([
-            'nama' => 'required|string|max:100',
-            'tgl_lahir' => 'required|date',
-            'gaji' => 'required|numeric',
-        ]);
-        $karyawan->update($data);
-
-        return response()->json(['data' => $karyawan], 200);
     }
 
     public function destroy(string $id)

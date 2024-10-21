@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
 {
+    protected $pdf;
     /**
      * Display a listing of the resource.
      */
@@ -39,7 +41,7 @@ class KaryawanController extends Controller
             'gaji' => 'required|numeric|min:0',
         ]);
 
-        $karyawan = new Karyawan;
+        $karyawan = new Karyawan();
         $karyawan->nama = $request->input('nama');
         $karyawan->tgl_lahir = $request->input('tgl_lahir');
         $karyawan->gaji = $request->input('gaji');
@@ -103,5 +105,29 @@ class KaryawanController extends Controller
 
         // Kembali ke halaman index dengan pesan sukses
         return redirect()->route('karyawan')->with('success', 'Data karyawan berhasil dihapus.');
+    }
+
+    // Tambahkan Dependency Injection untuk PDF di constructor
+    public function __construct(PDF $pdf)
+    {
+        $this->pdf = $pdf;
+    }
+
+    public function cetak_pdf()
+    {
+        // Ambil semua data karyawan
+        $karyawan = Karyawan::all();
+
+        // Ambil tanggal saat ini dalam format YYYYMMDD
+        $tanggal = date('Ymd');
+
+        // Gunakan instance PDF untuk generate PDF
+        $pdf = $this->pdf->loadView('karyawanpdf', ['karyawan' => $karyawan]);
+
+        // Nama file PDF dengan total karyawan dan tanggal
+        $filename = 'laporan-semua-karyawan-' . $tanggal . '.pdf';
+
+        // Unduh PDF dengan nama file yang dihasilkan
+        return $pdf->download($filename);
     }
 }

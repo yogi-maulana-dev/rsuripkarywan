@@ -23,5 +23,6 @@ Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
 Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
 Route::put('/karyawan/update/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
 Route::get('/karyawan/edit/{id}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+Route::get('/karyawan/cetak_pdf', [KaryawanController::class, 'cetak_pdf'])->name('karyawan.cetak_pdf');
 
 Route::delete('/karyawan/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');

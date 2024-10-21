@@ -159,6 +159,7 @@ return [
             /*
              * Package Service Providers...
              */
+            Barryvdh\DomPDF\ServiceProvider::class,
             Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
             /*
              * Application Service Providers...
@@ -188,6 +189,7 @@ return [
             'Jwt' => Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
             'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
             'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+            'PDF' => Barryvdh\DomPDF\Facade::class,
         ])
         ->toArray(),
 ];

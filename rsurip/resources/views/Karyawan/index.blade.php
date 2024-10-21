@@ -56,6 +56,11 @@
         @endif
 
         <a href="/karyawan_create" class="btn btn-info right" role="button">Tambah Karyawan</a>
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ route('karyawan.cetak_pdf') }}" class="btn btn-primary">
+                Cetak Semua PDF
+            </a>
+        </div>
 
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
