@@ -24,28 +24,30 @@
 <body>
     <h1>Selamat Datang Di Website Gaji RS Urip</h1>
 
-
-    <form method="post" action="{{ route('karyawan.update') }}">
+    <form method="post" action="{{ route('karyawan.update', $karyawan->id) }}">
         @csrf
+        @method('PUT')
+
         <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
+            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama"
+                value="{{ old('nama', $karyawan->nama) }}">
         </div>
 
         <div class="mb-3">
             <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-            <input type="date" class="form-control" name="tgl_lahir">
+            <input type="date" class="form-control" name="tgl_lahir"
+                value="{{ old('tgl_lahir', $karyawan->tgl_lahir) }}">
         </div>
 
         <div class="mb-3">
             <label for="gaji" class="form-label">Gaji</label>
-            <input type="number" class="form-control" name="gaji" placeholder="Masukkan Gaji">
+            <input type="number" class="form-control" name="gaji" placeholder="Masukkan Gaji"
+                value="{{ old('gaji', $karyawan->gaji) }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
-
-
 
     <!-- jQuery 3.7.1 -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>

@@ -60,6 +60,7 @@
                     <th>Nama</th>
                     <th>Tanggal Lahir</th>
                     <th>Gaji</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,6 +69,8 @@
                         <td>{{ $karyawans->nama }}</td>
                         <td>{{ $karyawans->tgl_lahir }}</td>
                         <td>{{ $karyawans->gaji }}</td>
+                        <td> <a href="{{ route('karyawan.edit', $karyawans->id) }}"
+                                class="btn btn-warning btn-sm">Edit</a></td>
                     </tr>
                 @endforeach
             </tbody>

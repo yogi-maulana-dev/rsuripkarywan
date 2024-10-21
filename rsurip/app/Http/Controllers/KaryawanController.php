@@ -62,14 +62,32 @@ class KaryawanController extends Controller
     public function edit(string $id)
     {
         //
+        $karyawan = Karyawan::findOrFail($id);
+
+        return view('karyawan.edit', compact('karyawan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'gaji' => 'required|numeric|min:0',
+        ]);
+
+        $karyawan = Karyawan::findOrFail($id);
+
+        $karyawan->nama = $request->input('nama');
+        $karyawan->tgl_lahir = $request->input('tgl_lahir');
+        $karyawan->gaji = $request->input('gaji');
+
+        $karyawan->save();
+
+        return redirect('/karyawan')->with('success', 'Karyawan berhasil diperbarui');
     }
 
     /**
