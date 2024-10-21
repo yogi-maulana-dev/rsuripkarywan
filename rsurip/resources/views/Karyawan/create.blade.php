@@ -25,7 +25,7 @@
     <h1>Selamat Datang Di Website Gaji RS Urip</h1>
 
 
-    <form method="post" action="">
+    <form method="post" action="{{ create_store }}">
         @csrf
         <input type="text" class="" name="nama">
         <input type="date" class="" name="tgl_lahir">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 21, 2024 at 03:33 AM
+-- Generation Time: Oct 21, 2024 at 04:47 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
   `tgl_lahir` date NOT NULL,
   `gaji` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `karyawan`
@@ -42,6 +42,34 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
 
 INSERT INTO `karyawan` (`id`, `nama`, `tgl_lahir`, `gaji`) VALUES
 (1, 'tes', '2024-10-21', 10000);
+
+--
+-- Triggers `karyawan`
+--
+DROP TRIGGER IF EXISTS `trg_karyawan_delete`;
+DELIMITER $$
+CREATE TRIGGER `trg_karyawan_delete` AFTER DELETE ON `karyawan` FOR EACH ROW BEGIN
+  INSERT INTO tlog (tanggal, jam, keterangan, id_karyawan) 
+  VALUES (OLD.tgl_lahir, NOW(), 3, OLD.id); -- Keterangan 3: Delete
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_karyawan_insert`;
+DELIMITER $$
+CREATE TRIGGER `trg_karyawan_insert` AFTER INSERT ON `karyawan` FOR EACH ROW BEGIN
+  INSERT INTO tlog (tanggal, jam, keterangan, id_karyawan) 
+  VALUES (NEW.tgl_lahir, NOW(), 1, NEW.id); -- Keterangan 1: Insert
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_karyawan_update`;
+DELIMITER $$
+CREATE TRIGGER `trg_karyawan_update` AFTER UPDATE ON `karyawan` FOR EACH ROW BEGIN
+  INSERT INTO tlog (tanggal, jam, keterangan, id_karyawan) 
+  VALUES (NEW.tgl_lahir, NOW(), 2, NEW.id); -- Keterangan 2: Update
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -55,8 +83,19 @@ CREATE TABLE IF NOT EXISTS `tlog` (
   `tanggal` date NOT NULL,
   `jam` timestamp NOT NULL,
   `keterangan` int NOT NULL,
+  `id_karyawan` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tlog`
+--
+
+INSERT INTO `tlog` (`id`, `tanggal`, `jam`, `keterangan`, `id_karyawan`) VALUES
+(1, '2024-10-21', '2024-10-21 04:44:11', 1, 2),
+(2, '2024-10-21', '2024-10-21 04:45:18', 2, 2),
+(3, '2024-10-21', '2024-10-21 04:45:34', 2, 2),
+(5, '2024-10-21', '2024-10-21 04:46:41', 3, 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

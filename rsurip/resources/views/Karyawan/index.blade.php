@@ -24,7 +24,7 @@
 <body>
     <h1>Selamat Datang Di Website Gaji RS Urip</h1>
 
-
+    <a href="/karyawan_create" class="btn btn-info right" role="button">Tambah Karyawan</a>
 
     <table id="example" class="table table-striped" style="width:100%">
         <thead>
