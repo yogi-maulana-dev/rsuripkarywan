@@ -6,7 +6,7 @@ Lalu buat database hr keemudian pilih menu import atau copy code sqlnya semua la
 
 Untuk program dibuat dengan laravel 10 dan php 8.2
 Buka file pada Text Editor
-Buka Terminal masuk kedalam project rsurip
+Buka Terminal masuk kedalam folder project rsurip
 lalu compoeser i
 copas file .env.example ke directory yang sama /root directory dan rename menjadi .env
 edit pada file .env bagian database name: hr
