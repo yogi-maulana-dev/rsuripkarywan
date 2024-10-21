@@ -95,6 +95,13 @@ class KaryawanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //.
+        $karyawan = Karyawan::findOrFail($id);
+
+        // Hapus karyawan
+        $karyawan->delete();
+
+        // Kembali ke halaman index dengan pesan sukses
+        return redirect()->route('karyawan')->with('success', 'Data karyawan berhasil dihapus.');
     }
 }

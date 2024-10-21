@@ -33,6 +33,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        <a class="nav-link" href="/welcome">Home</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/karyawan">Karyawan</a>
                     </li>
                     <li class="nav-item">
@@ -70,7 +73,15 @@
                         <td>{{ $karyawans->tgl_lahir }}</td>
                         <td>{{ $karyawans->gaji }}</td>
                         <td> <a href="{{ route('karyawan.edit', $karyawans->id) }}"
-                                class="btn btn-warning btn-sm">Edit</a></td>
+                                class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('karyawan.destroy', $karyawans->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
